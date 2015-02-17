@@ -32,7 +32,8 @@ app.post('/auth', function(req, res) {
     // Real user information doesn't need to be supplied
     channelData = {user_id: socketId};
   }
-  else if(channelName === 'presence-users') {
+  else if(channelName === 'presence-users' ||
+           channelName === 'presence-pitch') {
     channelData = {
       user_id: socketId,
       user_info: {
