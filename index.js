@@ -22,15 +22,23 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.post('/users_online', function(req, res) {
+app.post('/auth', function(req, res) {
   var channelName = req.body.channel_name;
   var socketId = req.body.socket_id;
   var channelData = null;
   
-  if(channelName === 'presence-users-online') {
+  if(channelName === 'presence-user-count') {
     // Only used for counting online users
     // Real user information doesn't need to be supplied
     channelData = {user_id: socketId};
+  }
+  else if(channelName === 'presence-users') {
+    channelData = {
+      user_id: socketId,
+      user_info: {
+        twitter_id: req.body.twitter_id
+      }
+    };
   }
   
   var auth = pusher.authenticate(socketId, channelName, channelData);
