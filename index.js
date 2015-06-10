@@ -37,7 +37,7 @@ app.post('/auth', function(req, res) {
     channelData = {
       user_id: socketId,
       user_info: {
-        twitter_id: req.body.twitter_id
+        twitter_id: req.body.twitter_id || socketId
       }
     };
   }
